@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,6 +27,7 @@ public class Livro implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+//	@NotNull(message = "Nome: Campo obrigatório")
 	private String nome;
 
 	private String autor;
@@ -35,6 +37,9 @@ public class Livro implements Serializable {
 	private String editora;
 
 	private String resumo;
+
+	@Column(name = "numero_paginas")
+	private Integer numeroPaginas;
 
 	@Transient
 	private List<Comentario> comentarios;
@@ -85,6 +90,14 @@ public class Livro implements Serializable {
 
 	public void setResumo(String resumo) {
 		this.resumo = resumo;
+	}
+
+	public Integer getNumeroPaginas() {
+		return numeroPaginas;
+	}
+
+	public void setNumeroPaginas(Integer numeroPaginas) {
+		this.numeroPaginas = numeroPaginas;
 	}
 
 	public List<Comentario> getComentarios() {
