@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @Table(name = "comentarios")
 public class Comentario implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 5938208779489095995L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

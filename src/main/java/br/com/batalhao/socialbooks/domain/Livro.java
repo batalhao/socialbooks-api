@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @Table(name = "livros")
 public class Livro implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -4492048505259102679L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
