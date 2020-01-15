@@ -17,34 +17,34 @@ import br.com.batalhao.socialbooks.domain.Comentario;
 import br.com.batalhao.socialbooks.services.ComentariosService;
 
 @RestController
-@RequestMapping
+@RequestMapping(value = "/livros")
 public class ComentariosResources {
 
 	@Autowired
 	private ComentariosService comentariosService;
 
-	@GetMapping(path = "/livros/comentarios", produces = "application/json")
+	@GetMapping(path = "/comentarios", produces = "application/json")
 	public ResponseEntity<List<Comentario>> list() {
 		return comentariosService.list();
 	}
 
-	@GetMapping(value = "/livros/comentarios/{id}", produces = "application/json")
+	@GetMapping(value = "/comentarios/{id}", produces = "application/json")
 	public ResponseEntity<Comentario> find(@PathVariable(name = "id") Long id) {
 		return comentariosService.find(id);
 	}
 
-	@PostMapping(value = "/livros/{livroId}/comentarios", produces = "application/json")
+	@PostMapping(value = "/{livroId}/comentarios", produces = "application/json")
 	public ResponseEntity<Comentario> save(@PathVariable(name = "livroId") Long livroId,
 			@RequestBody Comentario comentario) {
 		return comentariosService.save(livroId, comentario);
 	}
 
-	@PutMapping(value = "/livros/comentarios/{id}", produces = "application/json")
+	@PutMapping(value = "/comentarios/{id}", produces = "application/json")
 	public ResponseEntity<Comentario> update(@PathVariable(name = "id") Long id, @RequestBody Comentario comentario) {
 		return comentariosService.update(id, comentario);
 	}
 
-	@DeleteMapping(value = "/livros/comentarios/{id}", produces = "application/json")
+	@DeleteMapping(value = "/comentarios/{id}", produces = "application/json")
 	public ResponseEntity<?> delete(@PathVariable(name = "id") Long id) {
 		return comentariosService.delete(id);
 	}
