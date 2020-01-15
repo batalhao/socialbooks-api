@@ -2,6 +2,7 @@ package br.com.batalhao.socialbooks.services;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,10 @@ public class LivrosService {
 	public ResponseEntity<Livro> find(Long id) {
 		return livrosRepository.findById(id).map(record -> ResponseEntity.ok().body(record))
 				.orElse(ResponseEntity.notFound().build());
+	}
+
+	public Optional<Livro> findById(Long id) {
+		return livrosRepository.findById(id);
 	}
 
 	public ResponseEntity<Livro> save(Livro livro) {

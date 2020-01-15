@@ -5,13 +5,15 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -27,7 +29,6 @@ public class Livro implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-//	@NotNull(message = "Nome: Campo obrigatório")
 	private String nome;
 
 	private String autor;
@@ -41,7 +42,7 @@ public class Livro implements Serializable {
 	@Column(name = "numero_paginas")
 	private Integer numeroPaginas;
 
-	@Transient
+	@OneToMany(mappedBy = "livro", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	private List<Comentario> comentarios;
 
 	public Long getId() {
