@@ -1,4 +1,4 @@
-package br.com.batalhao.socialbooks.domain;
+package br.com.batalhao.socialbooks.domain.util;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

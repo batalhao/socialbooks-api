@@ -12,7 +12,7 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import br.com.batalhao.socialbooks.domain.Erro;
+import br.com.batalhao.socialbooks.domain.util.Erro;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
