@@ -45,7 +45,7 @@ public class Livro implements Serializable {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "autor_id")
-	@NotNull(message = "Autor: Campo obrigatório")
+//	@NotNull(message = "Autor: Campo obrigatório")
 	private Autor autor;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")

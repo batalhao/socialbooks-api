@@ -23,6 +23,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws AuthenticationRuntimeException {
 		try {
+			http.headers().frameOptions().sameOrigin();
+		    http.csrf().ignoringAntMatchers("/h2-console/**");
+		    http.authorizeRequests().antMatchers("/h2-console/**").permitAll();
+		        
 			http.authorizeRequests()
 				.antMatchers("/livros/**").authenticated()
 				.antMatchers("/autores/**").authenticated()
