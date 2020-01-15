@@ -44,7 +44,7 @@ public class LivrosResources {
 	}
 
 	@DeleteMapping(value = "/{id}", produces = "application/json")
-	public ResponseEntity<?> delete(@PathVariable(name = "id") Long id) {
+	public ResponseEntity<Object> delete(@PathVariable(name = "id") Long id) {
 		return livrosService.delete(id);
 	}
 

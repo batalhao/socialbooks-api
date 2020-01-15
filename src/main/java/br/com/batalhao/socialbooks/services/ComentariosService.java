@@ -59,7 +59,7 @@ public class ComentariosService {
 		}).orElse(ResponseEntity.notFound().build());
 	}
 
-	public ResponseEntity<?> delete(Long id) {
+	public ResponseEntity<Object> delete(Long id) {
 		return comentariosRepository.findById(id).map(record -> {
 			comentariosRepository.deleteById(id);
 			return ResponseEntity.noContent().build();

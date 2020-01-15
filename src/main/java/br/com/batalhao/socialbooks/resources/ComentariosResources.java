@@ -50,7 +50,7 @@ public class ComentariosResources {
 	}
 
 	@DeleteMapping(value = "/comentarios/{id}", produces = "application/json")
-	public ResponseEntity<?> delete(@PathVariable(name = "id") Long id) {
+	public ResponseEntity<Object> delete(@PathVariable(name = "id") Long id) {
 		return comentariosService.delete(id);
 	}
 

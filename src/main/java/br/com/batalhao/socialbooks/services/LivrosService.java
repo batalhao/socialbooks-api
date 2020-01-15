@@ -49,7 +49,7 @@ public class LivrosService {
 		}).orElse(ResponseEntity.notFound().build());
 	}
 
-	public ResponseEntity<?> delete(Long id) {
+	public ResponseEntity<Object> delete(Long id) {
 		return livrosRepository.findById(id).map(record -> {
 			livrosRepository.deleteById(id);
 			return ResponseEntity.noContent().build();
