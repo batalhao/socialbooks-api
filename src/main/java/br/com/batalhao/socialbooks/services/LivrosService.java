@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -28,13 +29,13 @@ public class LivrosService {
 		return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(livro.getId()).toUri();
 	}
 
-	public ResponseEntity<List<Livro>> list() {
-		return ResponseEntity.ok(livrosRepository.findAll());
+	public ResponseEntity<List<Livro>> list(CacheControl cacheControl) {
+		return ResponseEntity.ok().cacheControl(cacheControl).body(livrosRepository.findAll());
 	}
 
-	public ResponseEntity<Livro> find(Long id) {
-		return livrosRepository.findById(id).map(record -> ResponseEntity.ok().body(record))
-				.orElse(ResponseEntity.notFound().build());
+	public ResponseEntity<Livro> find(Long id, CacheControl cacheControl) {
+		return livrosRepository.findById(id).map(record -> ResponseEntity.ok().cacheControl(cacheControl).body(record))
+				.orElse(ResponseEntity.notFound().cacheControl(cacheControl).build());
 	}
 
 	public Optional<Livro> findById(Long id) {

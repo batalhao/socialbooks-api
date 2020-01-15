@@ -1,11 +1,13 @@
 package br.com.batalhao.socialbooks.resources;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,13 +33,16 @@ public class LivrosResources {
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<List<Livro>> list(HttpServletResponse response) {
 		Utils.setResponse(response);
-		return livrosService.list();
+		CacheControl cacheControl = CacheControl.maxAge(30, TimeUnit.SECONDS);
+		return livrosService.list(cacheControl);
 	}
 
 	@GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Livro> find(@PathVariable(name = "id") Long id, HttpServletResponse response) {
 		Utils.setResponse(response);
-		return livrosService.find(id);
+
+		CacheControl cacheControl = CacheControl.maxAge(30, TimeUnit.SECONDS);
+		return livrosService.find(id, cacheControl);
 	}
 
 	@PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
