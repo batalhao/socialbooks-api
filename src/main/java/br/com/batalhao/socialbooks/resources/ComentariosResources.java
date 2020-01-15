@@ -8,6 +8,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,6 +56,10 @@ public class ComentariosResources {
 	public ResponseEntity<Comentario> save(@PathVariable(name = "livroId") Long livroId,
 			@RequestBody @Valid Comentario comentario, HttpServletResponse response) {
 		Utils.setResponse(response);
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		comentario.setUsuario(auth.getName());
+
 		return comentariosService.save(livroId, comentario);
 	}
 

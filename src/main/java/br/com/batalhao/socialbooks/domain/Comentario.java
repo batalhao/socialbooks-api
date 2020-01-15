@@ -41,8 +41,6 @@ public class Comentario implements Serializable {
 	@JsonProperty(value = "comentario")
 	private String texto;
 
-	@NotEmpty(message = "Usuário: Campo obrigatório")
-	@Size(max = 100, message = "Usuário: Máximo de 100 caracteres")
 	private String usuario;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
