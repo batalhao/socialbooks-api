@@ -1,6 +1,7 @@
 package br.com.batalhao.socialbooks.services;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,6 +64,18 @@ public class ComentariosService {
 			comentariosRepository.deleteById(id);
 			return ResponseEntity.noContent().build();
 		}).orElse(ResponseEntity.notFound().build());
+	}
+
+	public ResponseEntity<List<Comentario>> findByLivro(Long livroId) {
+		List<Comentario> comentarios = new ArrayList<>();
+
+		comentariosRepository.findAll().stream().forEach(record -> {
+			if (record.getLivro().getId().equals(livroId)) {
+				comentarios.add(record);
+			}
+		});
+
+		return (comentarios.isEmpty()) ? ResponseEntity.notFound().build() : ResponseEntity.ok(comentarios);
 	}
 
 }

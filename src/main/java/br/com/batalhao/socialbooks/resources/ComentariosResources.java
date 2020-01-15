@@ -33,6 +33,11 @@ public class ComentariosResources {
 		return comentariosService.find(id);
 	}
 
+	@GetMapping(value = "/{livroId}/comentarios", produces = "application/json")
+	public ResponseEntity<List<Comentario>> findByLivro(@PathVariable(name = "livroId") Long livroId) {
+		return comentariosService.findByLivro(livroId);
+	}
+
 	@PostMapping(value = "/{livroId}/comentarios", produces = "application/json")
 	public ResponseEntity<Comentario> save(@PathVariable(name = "livroId") Long livroId,
 			@RequestBody Comentario comentario) {
