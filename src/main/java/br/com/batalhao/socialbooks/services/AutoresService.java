@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -36,9 +37,16 @@ public class AutoresService {
 	}
 
 	public ResponseEntity<Autor> save(Autor autor) {
-		autor.setId(null);
-		autor = autoresRepository.save(autor);
-		return ResponseEntity.created(buildUri(autor)).body(autor);
+		Optional<Autor> optionalAutor = autoresRepository.findByNomeAndNascimento(autor.getNome(),
+				autor.getNascimento());
+
+		if (optionalAutor.isPresent()) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body(optionalAutor.get());
+		} else {
+			autor.setId(null);
+			autor = autoresRepository.save(autor);
+			return ResponseEntity.created(buildUri(autor)).body(autor);
+		}
 	}
 
 	public ResponseEntity<Autor> update(Long id, Autor autor) {

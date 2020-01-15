@@ -55,11 +55,11 @@ public class Autor implements Serializable {
 		this.nome = nome;
 	}
 
-	public LocalDate getDataNascimento() {
+	public LocalDate getNascimento() {
 		return nascimento;
 	}
 
-	public void setDataNascimento(LocalDate nascimento) {
+	public void setNascimento(LocalDate nascimento) {
 		this.nascimento = nascimento;
 	}
 
