@@ -3,6 +3,7 @@ package br.com.batalhao.socialbooks.resources;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,13 +40,13 @@ public class LivrosResources {
 	}
 
 	@PostMapping(produces = "application/json")
-	public ResponseEntity<Livro> save(@RequestBody Livro livro, HttpServletResponse response) {
+	public ResponseEntity<Livro> save(@RequestBody @Valid Livro livro, HttpServletResponse response) {
 		Utils.setResponse(response);
 		return livrosService.save(livro);
 	}
 
 	@PutMapping(value = "/{id}", produces = "application/json")
-	public ResponseEntity<Livro> update(@PathVariable(name = "id") Long id, @RequestBody Livro livro,
+	public ResponseEntity<Livro> update(@PathVariable(name = "id") Long id, @RequestBody @Valid Livro livro,
 			HttpServletResponse response) {
 		Utils.setResponse(response);
 		return livrosService.update(id, livro);

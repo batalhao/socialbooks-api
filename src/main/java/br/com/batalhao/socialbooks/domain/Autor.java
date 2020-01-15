@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -34,6 +36,8 @@ public class Autor implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotEmpty(message = "Nome: Campo obrigatório")
+	@Size(max = 100, message = "Nome: Máximo de 100 caracteres")
 	private String nome;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
@@ -41,6 +45,8 @@ public class Autor implements Serializable {
 	@JsonSerialize(using = LocalDateSerializer.class)
 	private LocalDate nascimento;
 
+	@NotEmpty(message = "Nacionalidade: Campo obrigatório")
+	@Size(max = 100, message = "Nacionalidade: Máximo de 100 caracteres")
 	private String nacionalidade;
 
 	@OneToMany(mappedBy = "autor", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)

@@ -16,6 +16,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -36,22 +39,30 @@ public class Livro implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotEmpty(message = "Nome: Campo obrigatório")
+	@Size(max = 100, message = "Nome: Máximo de 100 caracteres")
 	private String nome;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "autor_id")
+	@NotNull(message = "Autor: Campo obrigatório")
 	private Autor autor;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	@JsonDeserialize(using = LocalDateDeserializer.class)
 	@JsonSerialize(using = LocalDateSerializer.class)
+	@NotNull(message = "Publicação: Campo obrigatório")
 	private LocalDate publicacao;
 
+	@NotNull(message = "Editora: Campo obrigatório")
+	@Size(max = 100, message = "Editora: Máximo de 100 caracteres")
 	private String editora;
 
+	@Size(max = 255, message = "Resumo: Máximo de 255 caracteres")
 	private String resumo;
 
 	@Column(name = "numero_paginas")
+	@NotNull(message = "Páginas: Campo obrigatório")
 	private Integer numeroPaginas;
 
 	@OneToMany(mappedBy = "livro", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)

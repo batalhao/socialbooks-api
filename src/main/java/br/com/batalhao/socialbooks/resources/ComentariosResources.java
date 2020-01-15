@@ -3,6 +3,7 @@ package br.com.batalhao.socialbooks.resources;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -47,14 +48,14 @@ public class ComentariosResources {
 
 	@PostMapping(value = "/{livroId}/comentarios", produces = "application/json")
 	public ResponseEntity<Comentario> save(@PathVariable(name = "livroId") Long livroId,
-			@RequestBody Comentario comentario, HttpServletResponse response) {
+			@RequestBody @Valid Comentario comentario, HttpServletResponse response) {
 		Utils.setResponse(response);
 		return comentariosService.save(livroId, comentario);
 	}
 
 	@PutMapping(value = "/comentarios/{id}", produces = "application/json")
-	public ResponseEntity<Comentario> update(@PathVariable(name = "id") Long id, @RequestBody Comentario comentario,
-			HttpServletResponse response) {
+	public ResponseEntity<Comentario> update(@PathVariable(name = "id") Long id,
+			@RequestBody @Valid Comentario comentario, HttpServletResponse response) {
 		Utils.setResponse(response);
 		return comentariosService.update(id, comentario);
 	}

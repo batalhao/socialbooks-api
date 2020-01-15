@@ -3,6 +3,7 @@ package br.com.batalhao.socialbooks.resources;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,13 +40,13 @@ public class AutoresResources {
 	}
 
 	@PostMapping(produces = "application/json")
-	public ResponseEntity<Autor> save(@RequestBody Autor autor, HttpServletResponse response) {
+	public ResponseEntity<Autor> save(@RequestBody @Valid Autor autor, HttpServletResponse response) {
 		Utils.setResponse(response);
 		return autoresService.save(autor);
 	}
 
 	@PutMapping(value = "/{id}", produces = "application/json")
-	public ResponseEntity<Autor> update(@PathVariable(name = "id") Long id, @RequestBody Autor autor,
+	public ResponseEntity<Autor> update(@PathVariable(name = "id") Long id, @RequestBody @Valid Autor autor,
 			HttpServletResponse response) {
 		Utils.setResponse(response);
 		return autoresService.update(id, autor);
