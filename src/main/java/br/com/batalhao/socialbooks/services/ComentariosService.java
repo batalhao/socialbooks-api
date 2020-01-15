@@ -1,6 +1,7 @@
 package br.com.batalhao.socialbooks.services;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -43,6 +44,7 @@ public class ComentariosService {
 		if (livro.isPresent()) {
 			comentario.setId(null);
 			comentario.setLivro(livro.get());
+			comentario.setData(LocalDate.now());
 			comentario = comentariosRepository.save(comentario);
 			return ResponseEntity.created(buildUri(comentario)).body(comentario);
 		} else {
