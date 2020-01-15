@@ -12,6 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -31,7 +33,9 @@ public class Livro implements Serializable {
 
 	private String nome;
 
-	private String autor;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "autor_id")
+	private Autor autor;
 
 	private LocalDate publicacao;
 
@@ -61,11 +65,11 @@ public class Livro implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getAutor() {
+	public Autor getAutor() {
 		return autor;
 	}
 
-	public void setAutor(String autor) {
+	public void setAutor(Autor autor) {
 		this.autor = autor;
 	}
 
