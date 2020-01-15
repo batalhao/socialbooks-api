@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,32 +28,32 @@ public class AutoresResources {
 	@Autowired
 	private AutoresService autoresService;
 
-	@GetMapping(produces = "application/json")
+	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<List<Autor>> list(HttpServletResponse response) {
 		Utils.setResponse(response);
 		return autoresService.list();
 	}
 
-	@GetMapping(value = "/{id}", produces = "application/json")
+	@GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Autor> find(@PathVariable(name = "id") Long id, HttpServletResponse response) {
 		Utils.setResponse(response);
 		return autoresService.find(id);
 	}
 
-	@PostMapping(produces = "application/json")
+	@PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Autor> save(@RequestBody @Valid Autor autor, HttpServletResponse response) {
 		Utils.setResponse(response);
 		return autoresService.save(autor);
 	}
 
-	@PutMapping(value = "/{id}", produces = "application/json")
+	@PutMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Autor> update(@PathVariable(name = "id") Long id, @RequestBody @Valid Autor autor,
 			HttpServletResponse response) {
 		Utils.setResponse(response);
 		return autoresService.update(id, autor);
 	}
 
-	@DeleteMapping(value = "/{id}", produces = "application/json")
+	@DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Object> delete(@PathVariable(name = "id") Long id, HttpServletResponse response) {
 		Utils.setResponse(response);
 		return autoresService.delete(id);

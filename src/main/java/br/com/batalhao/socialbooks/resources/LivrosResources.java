@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,32 +28,32 @@ public class LivrosResources {
 	@Autowired
 	private LivrosService livrosService;
 
-	@GetMapping(produces = "application/json")
+	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<List<Livro>> list(HttpServletResponse response) {
 		Utils.setResponse(response);
 		return livrosService.list();
 	}
 
-	@GetMapping(value = "/{id}", produces = "application/json")
+	@GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Livro> find(@PathVariable(name = "id") Long id, HttpServletResponse response) {
 		Utils.setResponse(response);
 		return livrosService.find(id);
 	}
 
-	@PostMapping(produces = "application/json")
+	@PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Livro> save(@RequestBody @Valid Livro livro, HttpServletResponse response) {
 		Utils.setResponse(response);
 		return livrosService.save(livro);
 	}
 
-	@PutMapping(value = "/{id}", produces = "application/json")
+	@PutMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Livro> update(@PathVariable(name = "id") Long id, @RequestBody @Valid Livro livro,
 			HttpServletResponse response) {
 		Utils.setResponse(response);
 		return livrosService.update(id, livro);
 	}
 
-	@DeleteMapping(value = "/{id}", produces = "application/json")
+	@DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Object> delete(@PathVariable(name = "id") Long id, HttpServletResponse response) {
 		Utils.setResponse(response);
 		return livrosService.delete(id);
