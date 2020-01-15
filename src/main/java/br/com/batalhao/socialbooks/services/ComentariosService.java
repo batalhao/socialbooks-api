@@ -69,11 +69,8 @@ public class ComentariosService {
 	public ResponseEntity<List<Comentario>> findByLivro(Long livroId) {
 		List<Comentario> comentarios = new ArrayList<>();
 
-		comentariosRepository.findAll().stream().forEach(record -> {
-			if (record.getLivro().getId().equals(livroId)) {
-				comentarios.add(record);
-			}
-		});
+		comentariosRepository.findAll().stream().filter(record -> record.getLivro().getId().equals(livroId))
+				.forEach(comentarios::add);
 
 		return (comentarios.isEmpty()) ? ResponseEntity.notFound().build() : ResponseEntity.ok(comentarios);
 	}
