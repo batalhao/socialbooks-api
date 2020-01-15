@@ -17,8 +17,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 @JsonInclude(value = Include.NON_NULL)
 @Entity
@@ -37,6 +42,9 @@ public class Livro implements Serializable {
 	@JoinColumn(name = "autor_id")
 	private Autor autor;
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
 	private LocalDate publicacao;
 
 	private String editora;
@@ -47,6 +55,7 @@ public class Livro implements Serializable {
 	private Integer numeroPaginas;
 
 	@OneToMany(mappedBy = "livro", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	@JsonInclude(value = Include.NON_EMPTY)
 	private List<Comentario> comentarios;
 
 	public Long getId() {
