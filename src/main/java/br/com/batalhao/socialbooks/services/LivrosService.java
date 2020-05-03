@@ -81,4 +81,8 @@ public class LivrosService {
 		}).orElse(ResponseEntity.notFound().build());
 	}
 
+	public Optional<List<Livro>> findByNome(String nomeLivro) {
+		return livrosRepository.findByNome(nomeLivro);
+	}
+
 }

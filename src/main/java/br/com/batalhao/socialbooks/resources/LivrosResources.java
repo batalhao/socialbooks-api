@@ -1,6 +1,7 @@
 package br.com.batalhao.socialbooks.resources;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.batalhao.socialbooks.domain.Livro;
@@ -65,5 +68,11 @@ public class LivrosResources {
 		Utils.setResponse(response);
 		return livrosService.delete(id);
 	}
+	
+	@GetMapping(path = "/pesquisa", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<Livro> pesquisar(@RequestParam(name = "livro") String nomeLivro) {
+        Optional<List<Livro>> livrosList = livrosService.findByNome(nomeLivro);
+        return livrosList.orElse(null);
+    }
 
 }
